@@ -4,6 +4,7 @@ services:
   # Stage 1: ТОЛЬКО PostgreSQL (Redis добавляем на Stage 2)
   postgres:
     image: postgres:15-alpine
+    container_name: docker-postgres-1
     environment:
       POSTGRES_DB: shop
       POSTGRES_USER: admin
@@ -16,5 +17,20 @@ services:
     # restart: always
     # healthcheck: ...
 
+  # 🎯 pgAdmin — для просмотра users таблицы!
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin-shop
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com    # ← ИСПРАВЛЕНО!
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"  # ← Открой localhost:5050
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
+  pgadmin_data:  # ← Для pgAdmin настроек 
