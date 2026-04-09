@@ -96,3 +96,30 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+# Shop API (NestJS + PostgreSQL + Docker)
+
+## 🚀 Быстрый старт:
+```bash
+git clone <твой-repo>
+cd shop/docker
+chmod +x start-dev.sh
+./start-dev.sh
+
+cd ../server    # или ../ (если NestJS в корне)
+npm install
+npm run start:dev
+```
+
+## Порты:
+- 🟢 API: http://localhost:3000
+- 🟢 pgAdmin: http://localhost:5050 
+  - Email: admin@example.com
+  - Password: admin123
+- 🟢 PostgreSQL: localhost:5432
+
+## Стек:
+- NestJS + TypeORM
+- PostgreSQL 15 (Docker)
+- pgAdmin 4 (Docker)
