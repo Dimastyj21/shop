@@ -4,12 +4,12 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-
+  
   @Column({ unique: true })
   email: string;
 
   @Column()
-  password: string;
+  password: string;  
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
