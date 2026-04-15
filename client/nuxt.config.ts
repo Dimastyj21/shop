@@ -1,7 +1,16 @@
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  srcDir: 'src/', 
+
+  dir: {
+    layouts: 'app/layouts',
+  },
+
+  devtools: { 
+    enabled: true,
+    vscode: {}
+  },
   
-  // 👇 Добавьте эту секцию
+
   devServer: {
     port: 4000
   },
@@ -9,6 +18,28 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: 'http://localhost:3000/api'
+    }
+  },
+  modules: [
+    '@pinia/nuxt'
+  ],
+
+  alias: {
+    '@': './src',
+    '@app': './src/app',
+    '@pages': './src/pages',
+    '@widgets': './src/widgets',
+    '@features': './src/features',
+    '@entities': './src/entities',
+    '@shared': './src/shared',
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+      ],
     }
   }
 })
