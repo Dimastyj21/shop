@@ -16,8 +16,9 @@ export class AuthService {
             throw new UnauthorizedException('User already exists');
         }
         const user = await this.usersService.create(email, password)
-        const token = this.jwtService.sign({ sub: user.id, email: user.email })
-        return { access_token: token, user: { id: user.id, email: user.email }}
+        const accessToken = this.jwtService.sign({ sub: user.id, email: user.email }, { expiresIn: '15m' })
+        const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: '7d'})
+        return { accessToken, refreshToken, user: { id: user.id, email: user.email }}
     }
 
     async login(email: string, password: string) {
@@ -29,8 +30,9 @@ export class AuthService {
         if(!isPasswordValid) {
             throw new UnauthorizedException('Invalid credentials');
         }
-        const token = this.jwtService.sign({ sub: user.id, email: user.email })
-        return { access_token: token, user: { id: user.id, email: user.email }}
+        const accessToken = this.jwtService.sign({ sub: user.id, email: user.email }, { expiresIn: '15m' })
+        const refreshToken = this.jwtService.sign({ sub: user.id }, { expiresIn: '7d' })
+        return { accessToken, refreshToken, user: { id: user.id, email: user.email }}
     }
 
 }
